@@ -1,0 +1,10 @@
+.zero{
+    width: 150px;
+    height: 75px;
+    background-color: #cacacc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    color:grey;
+}

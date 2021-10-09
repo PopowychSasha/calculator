@@ -1,0 +1,10 @@
+.Operation{
+    width: 75px;
+    height: 75px;
+    background-color: #fc9417;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    color:white;
+}
