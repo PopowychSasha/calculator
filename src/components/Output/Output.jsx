@@ -96,7 +96,7 @@ const Output = () => {
   } else {
     return (
       <div className={styles.output} style={{ fontSize: "35px" }}>
-        Завелике число
+        Велике число
       </div>
     );
   }
