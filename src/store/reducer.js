@@ -2,7 +2,8 @@ const initialState = {
     output:0,
     currentNumber:'0',
     typingNewNumber:true,
-    isAnyClick:false,
+    lastOperation:'',
+    result:0
 }
 
 export const reducer = (state = initialState,action)=>{
@@ -33,18 +34,18 @@ export const reducer = (state = initialState,action)=>{
         }
         case 'ADD_NUMBER':{
             return{
-                ...state,output:(Number(state.output) + Number(action.payload)),currentNumber:'0',typingNewNumber:false,isAnyClick:true
+                ...state,output:(Number(state.output) + Number(action.payload)),currentNumber:'0',typingNewNumber:false,lastOperation:'+'
             }
         }
         case 'MINUS_NUMBER':{
-            if(state.isAnyClick)
+            if(Number(state.output)===0)
             {
                 return{
-                    ...state,output:(Number(state.output) - Number(action.payload)),currentNumber:'0',typingNewNumber:false,isAnyClick:true
+                    ...state,output:(Number(action.payload)-Number(state.output)),currentNumber:'0',typingNewNumber:false,lastOperation:'-'
                 }
             }
             return{
-                ...state,isAnyClick:true
+                ...state,output:(Number(state.output) - Number(action.payload)),currentNumber:'0',typingNewNumber:false,lastOperation:'-'
             }
         }
         case "REMOVE_LAST_CHAR":{
@@ -67,20 +68,80 @@ export const reducer = (state = initialState,action)=>{
             }
         }
         case 'SET_INITIAL_DATA':{
+            console.log('SET_INITIAL_DATA');
+            
             return{
                 output:0,
                 currentNumber:'0',
                 typingNewNumber:true,
-                isAnyClick:false
+                isAnyClick:false,
+                result:0
             }
         }
-        case '+':
-        {
-            return state;
+        case 'PLUS_MINUS_SWAP':{
+            return{
+                ...state,currentNumber:state.currentNumber*(-1)
+            }
+        }
+        case 'ADD_DOT_TO_NUMBER':{
+            return{
+                ...state,currentNumber:state.currentNumber+'.'
+            }
+        }
+        case 'DIVIDE_NUMBER':{
+            if(Number(state.output)===0)
+            {
+                return{
+                    ...state,output:(Number(state.currentNumber)/1),currentNumber:'0',typingNewNumber:false,isAnyClick:true,lastOperation:'/'
+                }
+            }
+            return{
+                ...state,output:(Number(state.output) /  Number(state.currentNumber)),currentNumber:'0',typingNewNumber:false,isAnyClick:true,lastOperation:'/'
+            }
+        }
+        case 'MULTIPL_NUMBER':{
+            if(Number(state.output)===0)
+            {
+                return{
+                    ...state,output:(1 *  Number(state.currentNumber)),currentNumber:'0',typingNewNumber:false,isAnyClick:true,lastOperation:'*'
+                } 
+            }
+            return{
+                ...state,output:(Number(state.output) *  Number(state.currentNumber)),currentNumber:'0',typingNewNumber:false,isAnyClick:true,lastOperation:'*'
+            }
+        }
+        case 'EQUAL':{
+            if(state.lastOperation==='+')
+            {
+                return{
+                    ...state,result:Number(state.output)+Number(state.currentNumber),output:0,currentNumber:'0',typingNewNumber:true,lastOperation:'',
+                }
+            }
+            else if(state.lastOperation==='-')
+            {
+                return{
+                    ...state,result:Number(state.output)-Number(state.currentNumber),output:0,currentNumber:'0',typingNewNumber:true,lastOperation:'',
+                }
+            }
+            else if(state.lastOperation==='*')
+            {
+                return{
+                    ...state,result:Number(state.output)*Number(state.currentNumber),output:0,currentNumber:'0',typingNewNumber:true,lastOperation:'',
+                }
+            }
+            else if(state.lastOperation==='/')
+            {
+                return{
+                    ...state,result:Number(state.output)/Number(state.currentNumber),output:0,currentNumber:'0',typingNewNumber:true,lastOperation:'',
+                }
+            }
+            return{
+                ...state
+            }
         }
         default:
         {
-            return state;
+            return {...state}
         }
     }
 }

@@ -2,4 +2,5 @@
     width: 300px;
     display: block;
     margin: 0 auto;
+    box-shadow: 1px 1px 50px black;
 }

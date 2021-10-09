@@ -10,7 +10,7 @@ const C = ()=>{
 
     return(
         <>
-            {(output==0 && currentNumber=='0') ? <div className={styles.C}>AC</div> : <div onClick={()=>dispatch({type:'SET_INITIAL_DATA'})} className={styles.C}>C</div>}
+            {(output==0 && currentNumber=='0') ? <div className={styles.C} onClick={()=>{dispatch({type:'SET_INITIAL_DATA'})}}>AC</div> : <div onClick={()=>{console.log('YES)))'); dispatch({type:'SET_INITIAL_DATA'})}} className={styles.C}>C</div>}
         </>
     )
 }

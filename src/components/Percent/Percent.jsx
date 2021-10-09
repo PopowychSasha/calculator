@@ -1,15 +1,24 @@
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import styles from "./Percent.module.css";
 
-import { useDispatch } from 'react-redux';
-import styles from  './Percent.module.css';
-
-const Percent = ()=>{
+const Percent = () => {
   const dispatch = useDispatch();
+  const currentNumber = useSelector((state) => state.currentNumber);
 
-  return(
+  return (
     <>
-        <div onClick={()=>dispatch({type:'REMOVE_LAST_CHAR'})} className={styles.percent}>⟶</div>
+      <div
+        onClick={() => dispatch({ type: "REMOVE_LAST_CHAR" })}
+        className={styles.percent}
+        style={{
+          color: currentNumber.toString().length >= 30 ? "red" : "white",
+        }}
+      >
+        ⟶
+      </div>
     </>
-  )
-}
+  );
+};
 
 export default Percent;

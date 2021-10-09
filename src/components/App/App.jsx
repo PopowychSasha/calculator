@@ -11,7 +11,11 @@ import Dot from '../Dot/Dot';
 import Equal from '../Equal/Equal';
 import HorizontalLine from '../HorizontalLine/HorizontalLine';
 import VerticalLine from '../VerticalLine/VerticalLine';
+import { useSelector } from 'react-redux';
 const App = ()=>{
+    
+const previousOperation = useSelector(state=>state.previousOperation);
+console.log(`previousOperation=${previousOperation}`);
   const numbers_7_8_9 = [7,8,9];
   const numbers_4_5_6 = [4,5,6];
   const numbers_1_2_3 = [1,2,3];

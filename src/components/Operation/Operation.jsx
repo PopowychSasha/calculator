@@ -8,9 +8,9 @@ const Operation = (props)=>{
   const currentNumber = useSelector(state=>state.currentNumber);
 
   if(type==='/')
-    return <div className={styles.Operation}>/</div>
+    return <div className={styles.Operation} onClick={()=>dispatch({type:'DIVIDE_NUMBER',payload:Number(currentNumber)})}>/</div>
   else if(type==='*')
-    return <div className={styles.Operation}>*</div>
+    return <div className={styles.Operation} onClick={()=>dispatch({type:'MULTIPL_NUMBER',payload:Number(currentNumber)})}>*</div>
   else if(type==='+')
     return <div onClick={()=>{dispatch({type:'ADD_NUMBER', payload:Number(currentNumber)})}} className={styles.Operation}>+</div>
   else if(type==='-')
